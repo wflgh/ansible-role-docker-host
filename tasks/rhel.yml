@@ -1,0 +1,24 @@
+---
+
+- name: Remove old docker packages
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+    - docker
+    - docker-common
+    - docker-engine
+
+- name: Enable Docker CE Stable YUM repository
+  yum_repository:
+    name: docker-ce-stable
+    description:  Docker CE Stable - $basearch
+    baseurl: "{{ docker_stable_yum_repository_baseurl }}"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+
+- name: Install prereq YUM packages
+  package: name={{ item }} state=present
+  with_items: "{{ docker_prereq_yum_packages }}"
+  become: true

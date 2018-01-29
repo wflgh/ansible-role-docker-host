@@ -1,0 +1,27 @@
+---
+
+- name: Install Docker
+  package: name={{ docker_package_name}} state=present
+
+- name: Create /etc/docker directory
+  file:
+    path: /etc/docker
+    mode: 0660
+    owner: root
+    group: docker
+    state: directory
+
+- name: Configure docker daemon.json
+  template:
+    src: "{{ ansible_distribution|lower }}-daemon.json.j2"
+    dest: /etc/docker/daemon.json
+    mode: 0660
+    owner: root
+    group: docker
+  notify: restart docker service
+
+- name: Start Docker service and enable at boot
+  service:
+    name: docker
+    state: started
+    enabled: yes

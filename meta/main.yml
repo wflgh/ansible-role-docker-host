@@ -1,0 +1,14 @@
+galaxy_info:
+  author: wflgh
+  description: Install docker
+  license: 3-clause BSD license.
+  min_ansible_version: 1.6
+  platforms:
+    - name: EL
+      versions:
+      - 7
+  galaxy_tags:
+    - centos
+    - containers
+    - docker
+  dependencies: []
