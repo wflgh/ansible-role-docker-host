@@ -1,0 +1,12 @@
+---
+# defaults file for ansible-role-docker-host
+
+# Global defaults
+docker_edition: "ce"
+docker_package_name: "docker-{{ docker_edition }}"
+
+# CentOS/RHEL
+docker_prereq_yum_packages:
+  - device-mapper-persistent-data
+  - lvm2
+docker_stable_yum_repository_baseurl: "https://download.docker.com/linux/centos/7/$basearch/stable"

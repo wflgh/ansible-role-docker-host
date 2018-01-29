@@ -1,0 +1,9 @@
+---
+# tasks file for ansible-role-docker-host
+
+- name: Setup RHEL prereqs
+  include_tasks: rhel.yml
+  when: ansible_os_family|lower == 'redhat'
+
+- name: Install Docker
+  include_tasks: docker.yml
